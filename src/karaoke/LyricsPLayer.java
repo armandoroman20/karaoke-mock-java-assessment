@@ -2,7 +2,9 @@ package karaoke;
 
 import java.io.IOException;
 
-public class LyricsPLayer extends Player{
+import static java.lang.Thread.sleep;
+
+public class LyricsPLayer extends Player {
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -30,7 +32,7 @@ public class LyricsPLayer extends Player{
 
     private void displayText(String string) {
         String colorCode = RESET;
-        switch(textColor.toLowerCase()) {
+        switch (textColor.toLowerCase()) {
             case "red":
                 colorCode = RED;
                 break;
@@ -55,12 +57,30 @@ public class LyricsPLayer extends Player{
 
 
     @Override
-    public void play(Album newAlbum) {
-
+    public void play(Song newSong) {
+        System.out.println(RESET + "\nNow playing... " + newSong.getTitle() + " by " + newSong.getArtist());
+        Runtime r = Runtime.getRuntime(); // allows commands to be issued to the terminal
+        try {
+            r.exec("say " + "now playing..." + newSong.getTitle() + " by " + newSong.getArtist());
+            sleep(INTRO_PAUSE); // pauses thread
+            for (String lyric : newSong.getLyrics()) {
+                System.out.print(lyric + " " );
+                sleep(WORD_CADENCE);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void play(Song newSong) {
-        System.out.println(RESET + "Now playing... SONG-TITLE by SONG-ARTIST");
+    public void play(Album newAlbum) {
+        for (Song newSong : newAlbum.getSongs()) {
+            try {
+                sleep(NEXT_TRACK);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            play(newSong);
+        }
     }
 }

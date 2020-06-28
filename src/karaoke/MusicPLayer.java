@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class MusicPLayer extends Player{
 
     private String voice = "";
@@ -24,16 +26,12 @@ public class MusicPLayer extends Player{
         this.voice = voice;
     }
 
-    public void sleep(int INTRO_PAUSE){
-
-    }
-
     @Override
     public void play(Song newSong) {
-        Runtime r = Runtime.getRuntime();
+        Runtime r = Runtime.getRuntime(); // allows commands to be issued to the terminal
         try {
             r.exec("say " + "now playing..." + newSong.getTitle() + " by " + newSong.getArtist());
-            sleep(INTRO_PAUSE);
+            sleep(INTRO_PAUSE); // pauses thread
             for (String lyric : newSong.getLyrics()) {
                 if (voice.isEmpty()) {
                     r.exec("say " + lyric);
@@ -42,11 +40,12 @@ public class MusicPLayer extends Player{
                 }
                 sleep(WORD_CADENCE);
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+    // needed help on this
     @Override
     public void play(Album newAlbum) {
         for (Song newSong : newAlbum.getSongs()) {
