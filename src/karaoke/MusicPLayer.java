@@ -49,9 +49,10 @@ public class MusicPLayer extends Player{
 
     @Override
     public void play(Album newAlbum) {
-//        for (Album each : newSong){
-//            play(Song newSong);
-//        }
+
+        for(int i = 0; i <= newAlbum.size(); i++){
+            play(newSong);
+        }
     }
 
 }

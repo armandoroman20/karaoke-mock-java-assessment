@@ -28,6 +28,9 @@ public class Album {
     }
 
     public void printTrackListings(){
-        System.out.println(getAlbumName() + " listing...\n" + songs);
+        // enhanced for loop wasn't working for me, have to stick to the old method
+        for (int i = 0; i < songs.size(); i += 1) {
+            System.out.println((i + 1) + ". " + songs.get(i).getTitle() + " by " + songs.get(i).getArtist());
+        }
     }
 }
