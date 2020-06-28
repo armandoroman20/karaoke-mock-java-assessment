@@ -11,16 +11,16 @@ This repository is a source of practice for the Java concepts introduced in the 
 
 ## Instructions
 
-The ```KaraokeApp``` class included with this project contains a commented out main method that can be used to test your app after you complete it. Add other main methods to any class as needed for simpler testing as you build the app.    
+The ```karaoke.KaraokeApp``` class included with this project contains a commented out main method that can be used to test your app after you complete it. Add other main methods to any class as needed for simpler testing as you build the app.    
 
-1. add a ```Song``` class with the following...
+1. add a ```karaoke.Song``` class with the following...
 	
 	- private string properties for ```title```, ```artist```, and a private list of strings for ```lyrics```
 	- a constructor to assign values to all instance properties
 	- getters and setters for all instance properties
 	- a static method ```parseLyrics``` that takes in a single string input of possibly several words and returns a list of strings that are the output of splitting all the words in the input string on a single space character ```" "```
 
-1. add a ```Album``` class with the following...
+1. add a ```karaoke.Album``` class with the following...
 
 	- a private string property for the album ```name```
 	- a private property for a list of song objects called ```songs```
@@ -34,12 +34,12 @@ The ```KaraokeApp``` class included with this project contains a commented out m
 	2. Ready to Go by Republica
 	3. Airbag by Radiohead
 	```
-1. add a ```Playable``` interface with the following...
+1. add a ```karaoke.Playable``` interface with the following...
 
 	- a method called ```play``` that takes in an album instance with a void return type
 	- a method called ```play``` that takes in a song instance with a void return type
 
-1. add an abstract ```Player``` class that implements the ```Playable``` interface (not it's methods, however) and include the following...
+1. add an abstract ```Player``` class that implements the ```karaoke.Playable``` interface (not it's methods, however) and include the following...
 
 	- an int constant called ```WORD_CADENCE``` set to a value of 600
 	- an int constant called ```INTRO_PAUSE``` set to a value of 7000
@@ -57,8 +57,8 @@ The ```KaraokeApp``` class included with this project contains a commented out m
 		-  using the knowledge in the previous bullet points, this method should issue a say command to the terminal for each lyric in the list of song ```lyrics```
 		-  to avoid saying multiple words at once, issue include a pause after saying "now playing...SONG_TITLE by SONG_ARTIST" using the ```sleep()``` method and passing in the ```INTRO_PAUSE``` constant (this is the number of milliseconds to wait) and include a ```sleep()``` command after each lyric reading command is issued, passing in the constant ```WORD_CADENCE```
 		- for each say command, you can also pass in a ```-v``` flag and include the name of the computer voice you would like the say command to be spoken with (you can use the ```voice``` property for this)
-		- if you get stuck on these steps, an example of a possible implementation of the ```play(Song s)``` method is further below
-	- an implementation of the ```play``` method that takes in an album instance and invokes the ```play(Song s)``` method for each song in the album
+		- if you get stuck on these steps, an example of a possible implementation of the ```play(karaoke.Song s)``` method is further below
+	- an implementation of the ```play``` method that takes in an album instance and invokes the ```play(karaoke.Song s)``` method for each song in the album
 1. add a ```LyricsPlayer``` class that extends ```Player``` and includes the following...
 	- add the following static constants:
 	
@@ -109,24 +109,24 @@ The ```KaraokeApp``` class included with this project contains a commented out m
 In total, you should have the following files inside your ```src``` folder upon completion:
 
 ```
-Album
-KaraokeApp
+karaoke.Album
+karaoke.KaraokeApp
 LyricsPlayer
 MusicPlayer
-Playable
+karaoke.Playable
 Player
-Song
+karaoke.Song
 ```
 
 ## Hint
 
-***Skip over the following code example to avoid seeing an example solution of the play(Song s) method from the MusicPlayer class***
+***Skip over the following code example to avoid seeing an example solution of the play(karaoke.Song s) method from the MusicPlayer class***
 	
-Here is what a possible ```play(Song s)``` might look like in the ```MusicPlayer``` class...
+Here is what a possible ```play(karaoke.Song s)``` might look like in the ```MusicPlayer``` class...
 	
 ```
 @Override
-public void play(Song s) {
+public void play(karaoke.Song s) {
     Runtime r = Runtime.getRuntime();
     try {
         r.exec("say " + "now playing..." + s.getTitle() + " by " + s.getArtist());
